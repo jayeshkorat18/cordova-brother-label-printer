@@ -1,0 +1,77 @@
+{
+  "_args": [
+    [
+      {
+        "raw": "D:\\DevBrotherPrinter\\brother-label-printer-master",
+        "scope": null,
+        "escapedName": null,
+        "name": null,
+        "rawSpec": "D:\\DevBrotherPrinter\\brother-label-printer-master",
+        "spec": "D:\\DevBrotherPrinter\\brother-label-printer-master",
+        "type": "directory"
+      },
+      "D:\\Chetan\\IONIC 3\\Brother_Printer_05_12_V2\\node_modules"
+    ]
+  ],
+  "_from": "..\\..\\..\\DevBrotherPrinter\\brother-label-printer-master",
+  "_id": "cordova-brother-label-printer@0.0.4",
+  "_inCache": true,
+  "_location": "/cordova-brother-label-printer",
+  "_phantomChildren": {},
+  "_requested": {
+    "raw": "D:\\DevBrotherPrinter\\brother-label-printer-master",
+    "scope": null,
+    "escapedName": null,
+    "name": null,
+    "rawSpec": "D:\\DevBrotherPrinter\\brother-label-printer-master",
+    "spec": "D:\\DevBrotherPrinter\\brother-label-printer-master",
+    "type": "directory"
+  },
+  "_requiredBy": [
+    "#USER",
+    "/"
+  ],
+  "_resolved": "file:..\\..\\..\\DevBrotherPrinter\\brother-label-printer-master",
+  "_shasum": "c29557c7150d73d5ff0e86eefdd351f50db82e75",
+  "_shrinkwrap": null,
+  "_spec": "D:\\DevBrotherPrinter\\brother-label-printer-master",
+  "_where": "D:\\Chetan\\IONIC 3\\Brother_Printer_05_12_V2\\node_modules",
+  "author": {
+    "name": "Thomas Gordon Lowrey IV"
+  },
+  "bugs": {
+    "url": "https://github.com/gordol/cordova-brother-label-printer/issues"
+  },
+  "cordova": {
+    "id": "cordova-brother-label-printer",
+    "platforms": [
+      "android",
+      "ios"
+    ]
+  },
+  "dependencies": {},
+  "description": "Cordova hooks for Brother Print SDK",
+  "devDependencies": {},
+  "engines": [
+    {
+      "name": "cordova",
+      "version": ">=3.0.0"
+    }
+  ],
+  "homepage": "https://github.com/gordol/cordova-brother-label-printer#readme",
+  "keywords": [
+    "brother",
+    "sdk",
+    "print"
+  ],
+  "license": "MIT (https://github.com/gordol/cordova-brother-label-printer/blob/master/LICENSE)",
+  "name": "cordova-brother-label-printer",
+  "optionalDependencies": {},
+  "readme": "# Cordova Brother Label Printer Plugin\n\nUses the Brother Print SDK for Android...\n\nMore info can be found here, including a list of compatible printers: http://www.brother.com/product/dev/mobile/android/index.htm\n\nAlready bundled is the following version: v3.0.4 (5/18/2016) which is in the `src/android/libs` dir. By downloading this you agree to the Brother SDK License terms which are included in the README under the libs dir.\n\n## Installing\n\nIn your Cordova project, run the following command to install the plugin.\n\n```\ncordova plugin add https://github.com/gordol/cordova-brother-label-printer\n```\n\nAnd then read [usage](#usage) below.\n\n## Help and Support\n\nPlease do not email me for support or help with this plugin, use the issue tracker link above, so everyone will benefit from community questions and involvement, and I don't have to answer the same questions over and over for many individuals.\n\nThis is a Cordova plugin, firstly. You should be familiar with the Cordova plugin system before you try to use this plugin. Fortunately, it's pretty straight forward and easy to understand.\n\nYou can [read more about Android plugin development for Cordova here](https://cordova.apache.org/docs/en/latest/guide/platforms/android/plugin.html).  Knowledge of all of these internals is not necessary, but it doesn't hurt to be familiar either. \n\nRead here to [learn how to use Cordova Plugins](https://cordova.apache.org/docs/en/latest/guide/cli/index.html#add-plugins).\n\nIf you still have questions, please use the [issue tracker](https://github.com/3screens/cordova-brother-label-printer/issues). Please look at existing issues, and if your question is not answered yet, feel free to open a new issue and I'm happy to assist.\n\n\n## Target mobile printers:\n```\nPocketJet PJ-722, PJ-723, PJ-762, PJ-763, PJ-763MFi, PJ-773\nPocketJet PJ-622, PJ-623, PJ-662, PJ-663\nPocketJet PJ-520, PJ-522, PJ-523, PJ-560, PJ-562, PJ-563\nMPrint MW-145MFi, MW-260MFi\nMPrint MW-140BT, MW-145BT, MW-260\nRJ-4030Ai, RJ-4030, RJ-4040\nTD-2020, TD-2120N, TD-2130N, TD-4000, TD-4100N\nQL-710W, QL-720NW\nPT-E550W, PT-P750W\nRJ-3050, RJ-3150\nPT-E800W, PT-D800W, PT-E850TKW\nPT-P900W, PT-P950NW\n```\n\n__Tested models:__ `QL-720NW`, `QL-820NWB`\n\n(if you have tried this with other models, please update this list and send a pull request)\n\n\n## Supported interfaces (by this plugin):\n\n* Wi-Fi (Infrastructure mode)\n* Bluetooth (Android only, at the moment, iOS needs more work. See [PR10](https://github.com/gordol/cordova-brother-label-printer/pull/10)\n* USB\n\n\n## Usage\n\nSee here for JS interfaces to the plugin: `www/printer.js`\n\nThere are six available methods... \n\n* [findNetworkPrinters(success, failure)](#findnetworkprinters)\n* [findBluetoothPrinters(success, failure)](#findbluetoothprinters)\n* [findPrinters(success, failure)](#findprinters)\n* [setPrinter(printer, success, failure)](#setprinter)\n* [printViaSDK(data, success)](#printviasdk)\n* [sendUSBConfig(data, success)](#sendusbconfig)\n\n### findNetworkPrinters\n\nUpon success, [`findNetworkPrinters`](#findNetworkPrinters) will provide a list of printers that were discovered on the network (likely using WiFi). It is not considered an error for no printers to be found, and in this case the list will just be empty.\n\n```typescript\nfunction findNetworkPrinters(success: (printers: Printer[]) => void, failure: (reason: string) => void): void\n```\n\n### findBluetoothPrinters\n\nUpon success, [`findBluetoothPrinters`](#findBluetoothPrinters) will provide a list of printers that were discovered that have already been paired via Bluetooth. It is not considered an error for no printers to be found, and in this case the list will just be empty.\n\n```typescript\nfunction findBluetoothPrinters(success: (printers: Printer[]) => void, failure: (reason: string) => void): void\n```\n\n### findPrinters\n\n[`findPrinters`](#findPrinters) is a convenience function that will perform the actions of both [`findNetworkPrinters`](#findNetworkPrinters) and [`findBluetoothPrinters`](#findBluetoothPrinters), and combine the the results into a single continuous list.\n\n```typescript\nfunction findPrinters(success: (printers: Printer[]) => void, failure: (reason: string) => void): void\n```\n\n### setPrinter\n\nmust be called before [`printViaSDK`](#printViaSDK). It takes a single object that should be one of the objects returned from [`findNetworkPrinters`](#findNetworkPrinters), [`findBluetoothPrinters`](#findBluetoothPrinters), or [`findPrinters`](#findPrinters). Upon successfully setting the printer, the success callback\nwill be invoked.  Otherwise, the error callback will be invoked with a string for an error message.\n\n```typescript\nfunction setPrinter(printer: Printer, success: () => void, failure: (reason: string) => void): void\n```\n\n### printViaSDK\n\ntakes one parameter, which is a base64 encoded bitmap image. The result should be a status code that is passed directly from the SDK. The status codes are documnted in the Brother SDK Appendix in section 4.2.2.5.Error Code. If everything works, the response should be `\"ERROR_NONE\"`.\n\n__Clarification__:\n> A bitmap image in this case can be any image with an encoding that is supported by the platform.\n\n```typescript\nfunction printViaSDK(data: string, success: () => void): void\n```\n\n### sendUSBConfig\n\ncalls the Brother SDK's `printFile` method. The expected input is a string containing raw print commands, which is written to a temporary file in the app cache directory, and is then sent to the `printFile` method and deleted afterwards. You will need a device that supports USB-OTG and a USB-OTG cable. On first run the app will request USB permissions, and it should be saved after that for subsequent prints. As-is, this method is used to send raw commands in PCL (Printer Control Language) to the printer... For example, to configure the network settings of the printer, etc... You will need to reach out to Brother for documentation of the PCL commands. You can probably find them by searching for \"[Brother Printer Command Reference](https://duckduckgo.com/?q=Brother+Printer+Command+Reference)\" and appending your model number. This method could be extended easily to accept other types of file input, so you could, for example, print JPG images, etc...\n\n```typescript\nfunction sendUSBConfig(data: string, success: () => void): void\n```\n### Interface Reference\n\n```typescript\ninterface Printer {\n    model: string // Usually of the form 'QL_720NW' on Android\n    port: 'NET' | 'BLUETOOTH'\n    modelName: string // Usually of the form 'Brother QL-720NW'\n    ipAddress?: string\n    macAddress?: string\n    serialNumber?: string\n    nodeName?: string\n    location?: string\n}\n```\n",
+  "readmeFilename": "README.md",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/gordol/cordova-brother-label-printer.git"
+  },
+  "version": "0.0.4"
+}
